@@ -16,7 +16,9 @@
 
 @interface TAGAnimateView ()
 {
-    BOOL isRotateLeft;
+    BOOL isRotateLeft,isRotateRight;
+    int leftCount,rightCount;
+    UILabel *currentLabel;
 }
 @property (strong,nonatomic) NSMutableArray *stringArray;
 @property (strong,nonatomic) NSMutableArray *textArray;
@@ -43,9 +45,9 @@
 
 - (void)setDefaultSettings {
     //    self.textSize = CGSizeMake(self.frame.size.width - (TEXT_SPACING * 2), 40);
-    self.textSize  = CGSizeMake(200+ (TEXT_SPACING * 2), 35);
+    self.textSize  = CGSizeMake(200+ (TEXT_SPACING * 2), 38);
     self.textColor = [UIColor blackColor];
-    self.font = [UIFont boldSystemFontOfSize:32];
+    self.font = [UIFont boldSystemFontOfSize:35];
 }
 
 - (void)addStringToAnimate:(NSString *)string {
@@ -58,6 +60,9 @@
 - (void)startAnimation {
     [self removeLabels];
     isRotateLeft = NO;
+    isRotateRight = NO;
+    leftCount = 0;
+    rightCount = 0;
     self.clipsToBounds = YES;
     
     _textArray = [[NSMutableArray alloc] init];
@@ -111,6 +116,7 @@
 
 - (void)performAnimationForText:(NSString *)text {
     UILabel *textLabel = [self newLabelWithText:text];
+    currentLabel = textLabel;
     [self animateNewTextLabel:textLabel];
     [self.labelArray addObject:textLabel];
 }
@@ -119,7 +125,7 @@
     UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [textLabel setFont:self.font];
     textLabel.textColor = self.textColor;
-    textLabel.text = text;
+    textLabel.text = [text uppercaseString];
     textLabel.textAlignment = NSTextAlignmentLeft;
     textLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
     //    textLabel.backgroundColor = [UIColor blueColor];
@@ -128,7 +134,10 @@
     CGRect frame = textLabel.frame;
     frame.size = self.textSize;
     frame.origin.x = self.frame.size.width/3;
-    frame.origin.y = self.frame.size.height/1.5 - self.textSize.height - TEXT_PADDING - self.font.pointSize-30;
+    //    if(self.labelArray.count ==0 && self.textArray.count>10)
+    //    frame.origin.y = self.frame.size.height/2 - self.textSize.height - TEXT_PADDING - self.font.pointSize+30;
+    //    else
+    frame.origin.y = self.frame.size.height/2 - self.textSize.height - TEXT_PADDING - self.font.pointSize;
     textLabel.frame = frame;
     [textLabel sizeToFit];
     
@@ -160,44 +169,71 @@
 }
 
 - (void)moveOtherTextLabels {
-    //    NSMutableArray *movedOutLabels = [[NSMutableArray alloc] init];
     int i = 1;
     for (UILabel *textLabel in self.labelArray) {
-        if(i%5==0 && !isRotateLeft)
+        if(i%10 == 0 && i>rightCount)
+        {
+            [self rotateRight:5 valueIndex:i];
+            [self rotateRight:4 valueIndex:i];
+            [self rotateRight:3 valueIndex:i];
+            [self rotateRight:2 valueIndex:i];
+            [self rotateRight:1 valueIndex:i];
+            
+            for(int k=6;k<=10;k++)
+            {
+                UILabel *label = [self.labelArray objectAtIndex:i-k];
+                label.hidden = YES;
+            }
+            isRotateRight = YES;
+            rightCount = i;
+        }
+        else if(i%5==0 && (i>leftCount && !(i%10==0)))
         {
             [self rotateLeft:1 valueIndex:i];
             [self rotateLeft:2 valueIndex:i];
             [self rotateLeft:3 valueIndex:i];
             [self rotateLeft:4 valueIndex:i];
             [self rotateLeft:5 valueIndex:i];
-            isRotateLeft = YES;
             
+            if(i>10)
+            {
+                for(int k=6;k<=10;k++)
+                {
+                    UILabel *label = [self.labelArray objectAtIndex:i-k];
+                    label.hidden = YES;
+                }
+            }
+            
+            leftCount = i;
+            isRotateLeft = YES;
         }
         else{
+            if(i==2)
+            {
+                UILabel *prevTextLable = [self.labelArray objectAtIndex:0];
+                CGFloat diff = textLabel.frame.origin.y-prevTextLable.frame.origin.y;
+                if(diff>40)
+                {
+                    NSLog(@"difff....%f",diff);
+                    CGRect frame = prevTextLable.frame;
+                    frame.origin = CGPointMake(frame.origin.x, frame.origin.y+diff-80);
+                    prevTextLable.frame = frame;
+                    
+                }
+            }
             CGRect frame = textLabel.frame;
             frame.origin = CGPointMake(frame.origin.x, frame.origin.y - self.textSize.height - TEXT_SPACING);
             textLabel.frame = frame;
-            
-            //            if ((textLabel.frame.origin.y + textLabel.frame.size.height) <= 0) {
-            //                [movedOutLabels addObject:textLabel];
-            //            }
         }
         i++;
     }
-    //    for (UILabel *textLabel in movedOutLabels) {
-    //        [textLabel removeFromSuperview];
-    //        [self.labelArray removeObject:textLabel];
-    //    }
 }
 
 -(void)rotateLeft:(int)index valueIndex:(int)valueIndex
 {
     UILabel *textLabel = [self.labelArray objectAtIndex:valueIndex-index];
     CGRect prevFrame = textLabel.frame;
-
-    NSLog(@"1print frame ...%@",NSStringFromCGRect(textLabel.frame));
     textLabel.transform = CGAffineTransformMakeRotation (-3.14/2);
-    NSLog(@"2print frame ...%@",NSStringFromCGRect(textLabel.frame));
     
     CGRect newframe = CGRectMake(prevFrame.origin.x, prevFrame.origin.y-textLabel.frame.size.height+prevFrame.size.height, textLabel.frame.size.width,textLabel.frame.size.height);
     
@@ -206,10 +242,30 @@
         frame.origin = CGPointMake(frame.origin.x-(self.textSize.height*index), frame.origin.y+(self.textSize.height*(index)));
     else
         frame.origin = CGPointMake(frame.origin.x-(self.textSize.height*index), frame.origin.y);
-        
+    
     textLabel.frame = frame;
     
-    NSLog(@"%f,,,,%f",textLabel.frame.origin.x,textLabel.frame.origin.y);
+}
+
+-(void)rotateRight:(int)index valueIndex:(int)valueIndex
+{
+    
+    UILabel *textLabel = [self.labelArray objectAtIndex:valueIndex-index];
+    CGRect prevFrame = textLabel.frame;
+    
+    NSLog(@"1print frame ...%@",NSStringFromCGRect(textLabel.frame));
+    textLabel.transform = CGAffineTransformMakeRotation (3.14/2);
+    NSLog(@"2print frame ...%@....%@",NSStringFromCGRect(currentLabel.frame),currentLabel.text);
+    
+    CGRect newframe = CGRectMake(currentLabel.frame.origin.x+currentLabel.frame.size.width, prevFrame.origin.y-textLabel.frame.size.height+prevFrame.size.height, textLabel.frame.size.width,textLabel.frame.size.height);
+    
+    CGRect frame = newframe;
+    if(index!=1)
+        frame.origin = CGPointMake(frame.origin.x-10+(self.textSize.height*(index-1)), frame.origin.y+(self.textSize.height*(index)));
+    else
+        frame.origin = CGPointMake(frame.origin.x-10, frame.origin.y);
+    
+    textLabel.frame = frame;
 }
 
 - (void)removeLabels {
