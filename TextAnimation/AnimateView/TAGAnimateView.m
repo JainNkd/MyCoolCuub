@@ -74,6 +74,7 @@
 
 - (void)stopAnimation {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [self.layer removeAllAnimations];
     self.stopTextAnimation = YES;
     [self.stringArray removeAllObjects];
     [self.textArray removeAllObjects];

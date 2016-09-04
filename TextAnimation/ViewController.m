@@ -11,6 +11,9 @@
 #import "HPGrowingTextView.h"
 
 @interface ViewController ()<HPGrowingTextViewDelegate>
+{
+    BOOL isStopBackgroundAnimation;
+}
 
 @property (weak, nonatomic) IBOutlet UIButton *clickButton;
 @property (weak, nonatomic) IBOutlet TAGAnimateView *animateView;
@@ -95,6 +98,7 @@
     self.animateView.frame = tableFrame;
     [self.animateView stopAnimation];
     [self.animateView removeLabels];
+    isStopBackgroundAnimation = YES;
     [UIView commitAnimations];
 }
 
@@ -131,9 +135,11 @@
 - (IBAction)sayPressed:(id)sender
 {
     [self.textView resignFirstResponder];
-//    [self setViewAnimation];
+
     if (![self.textView.text isEqualToString:@""] && ![[self.textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
         [self.animateView stopAnimation];
+        isStopBackgroundAnimation = NO;
+        [self setViewAnimation];
         [self.animateView addStringToAnimate:self.textView.text];
         [self.animateView startAnimation];
         self.textView.text = @"";
@@ -186,29 +192,50 @@
      }
                      completion:^(BOOL finished)
      {
-         
+         if(isStopBackgroundAnimation){
+             self.animateView.backgroundColor = [UIColor lightGrayColor];
+             return;
+         }
          [UIView animateWithDuration:0.25 delay:1 options:UIViewAnimationOptionCurveEaseIn animations:^{
              self.animateView.backgroundColor = [UIColor colorWithRed:202.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1];
          } completion:^(BOOL finished)
           {
+              if(isStopBackgroundAnimation){
+                  self.animateView.backgroundColor = [UIColor lightGrayColor];
+                  return;
+              }
               [UIView animateWithDuration:0.25 delay:1 options:UIViewAnimationOptionCurveEaseIn animations:^{
                   self.animateView.backgroundColor = [UIColor colorWithRed:238.0/255.0 green:230.0/255.0 blue:133.0/255.0 alpha:1];
               } completion:^(BOOL finished)
                {
+                   if(isStopBackgroundAnimation){
+                       self.animateView.backgroundColor = [UIColor lightGrayColor];
+                       return;
+                   }
                    [UIView animateWithDuration:0.25 delay:1 options:UIViewAnimationOptionCurveEaseIn animations:^{
                        self.animateView.backgroundColor = [UIColor colorWithRed:198.0/255.0 green:113.0/255.0 blue:133.0/255.0 alpha:1];
                    } completion:^(BOOL finished)
                     {
+                        if(isStopBackgroundAnimation){
+                            self.animateView.backgroundColor = [UIColor lightGrayColor];
+                            return;
+                        }
                         [UIView animateWithDuration:0.25 delay:1 options:UIViewAnimationOptionCurveEaseIn animations:^{
                             self.animateView.backgroundColor = [UIColor colorWithRed:105/255.0 green:139.0/255.0 blue:34.0/255.0 alpha:1];
                         } completion:^(BOOL finished)
                          {
-                             [UIView animateWithDuration:0.25 delay:1 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                             if(isStopBackgroundAnimation){
+                                 self.animateView.backgroundColor = [UIColor lightGrayColor];
+                                 return;
+                             }                             [UIView animateWithDuration:0.25 delay:1 options:UIViewAnimationOptionCurveEaseIn animations:^{
                                  self.animateView.backgroundColor = [UIColor colorWithRed:240.0/255.0 green:128.0/255.0 blue:128.0/255.0 alpha:1];
                              } completion:^(BOOL finished)
                               {
+                                  if(isStopBackgroundAnimation){
+                                      self.animateView.backgroundColor = [UIColor lightGrayColor];
+                                      return;
+                                  }
                                   [self setViewAnimation];
-                                  
                               }
                               ];
                              
