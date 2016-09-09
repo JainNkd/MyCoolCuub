@@ -7,6 +7,8 @@
 //
 
 #import "TAGAnimateView.h"
+#import "CoolCUUPUtill.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define TEXT_PADDING 0
 #define TEXT_SPACING 0
@@ -45,8 +47,9 @@
 
 - (void)setDefaultSettings {
     //    self.textSize = CGSizeMake(self.frame.size.width - (TEXT_SPACING * 2), 40);
-    self.textSize  = CGSizeMake(200+ (TEXT_SPACING * 2), 38);
-    self.textColor = [UIColor blackColor];
+    self.textSize  = CGSizeMake(200+ (TEXT_SPACING * 2), 35);
+    self.textColor = [UIColor whiteColor];
+//    self.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:35];
     self.font = [UIFont boldSystemFontOfSize:35];
 }
 
@@ -97,6 +100,15 @@
                 [self animateNewText];
             }
         }
+        else
+        {
+            //Infinite Text Aniamtion
+            NSString *animationText = [CoolCUUPUtill getAnimationText];
+            //Text Animation start
+            [self stopAnimation];
+            [self addStringToAnimate:animationText];
+            [self startAnimation];
+        }
     }
 }
 
@@ -141,6 +153,13 @@
     frame.origin.y = self.frame.size.height/2 - self.textSize.height - TEXT_PADDING - self.font.pointSize;
     textLabel.frame = frame;
     [textLabel sizeToFit];
+    
+    textLabel.layer.shadowColor = [[UIColor blackColor] CGColor];
+    textLabel.layer.shadowOpacity = 0.50;
+    textLabel.layer.shadowRadius =  1.0;
+    textLabel.shadowOffset = CGSizeMake(1,5);
+    textLabel.layer.masksToBounds = NO;
+    
     
     
     //    textLabel.center = CGPointMake(self.frame.size.width/2.0f, self.frame.size.height - self.textSize.height - TEXT_PADDING - self.font.pointSize);
@@ -209,19 +228,20 @@
             isRotateLeft = YES;
         }
         else{
-            if(i==2)
-            {
-                UILabel *prevTextLable = [self.labelArray objectAtIndex:0];
-                CGFloat diff = textLabel.frame.origin.y-prevTextLable.frame.origin.y;
-                if(diff>40)
-                {
-                    NSLog(@"difff....%f",diff);
-                    CGRect frame = prevTextLable.frame;
-                    frame.origin = CGPointMake(frame.origin.x, frame.origin.y+diff-80);
-                    prevTextLable.frame = frame;
-                    
-                }
-            }
+            //For 1st label diff
+//            if(i==2)
+//            {
+//                UILabel *prevTextLable = [self.labelArray objectAtIndex:0];
+//                CGFloat diff = textLabel.frame.origin.y-prevTextLable.frame.origin.y;
+//                if(diff>40)
+//                {
+//                    NSLog(@"difff....%f",diff);
+//                    CGRect frame = prevTextLable.frame;
+//                    frame.origin = CGPointMake(frame.origin.x, frame.origin.y+diff-80);
+//                    prevTextLable.frame = frame;
+//                    
+//                }
+//            }
             CGRect frame = textLabel.frame;
             frame.origin = CGPointMake(frame.origin.x, frame.origin.y - self.textSize.height - TEXT_SPACING);
             textLabel.frame = frame;
@@ -254,9 +274,7 @@
     UILabel *textLabel = [self.labelArray objectAtIndex:valueIndex-index];
     CGRect prevFrame = textLabel.frame;
     
-    NSLog(@"1print frame ...%@",NSStringFromCGRect(textLabel.frame));
     textLabel.transform = CGAffineTransformMakeRotation (3.14/2);
-    NSLog(@"2print frame ...%@....%@",NSStringFromCGRect(currentLabel.frame),currentLabel.text);
     
     CGRect newframe = CGRectMake(currentLabel.frame.origin.x+currentLabel.frame.size.width, prevFrame.origin.y-textLabel.frame.size.height+prevFrame.size.height, textLabel.frame.size.width,textLabel.frame.size.height);
     

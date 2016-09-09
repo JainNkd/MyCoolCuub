@@ -13,6 +13,8 @@
 		010761F71D7B3C5900BFE64C /* icon-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 010761F11D7B3C5800BFE64C /* icon-40@3x.png */; };
 		010761F81D7B3C5900BFE64C /* icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 010761F21D7B3C5800BFE64C /* icon-60@2x.png */; };
 		010761F91D7B3C5900BFE64C /* icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 010761F31D7B3C5800BFE64C /* icon-60@3x.png */; };
+		011AEEDC1D8062DD00AF1822 /* CoolCUUPUtill.m in Sources */ = {isa = PBXBuildFile; fileRef = 011AEEDB1D8062DD00AF1822 /* CoolCUUPUtill.m */; };
+		011AEEDE1D81DC2B00AF1822 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011AEEDD1D81DC2B00AF1822 /* QuartzCore.framework */; };
 		0BA5FC2A1A46667C00F3391E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5FC291A46667C00F3391E /* main.m */; };
 		0BA5FC2D1A46667C00F3391E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5FC2C1A46667C00F3391E /* AppDelegate.m */; };
 		0BA5FC301A46667C00F3391E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5FC2F1A46667C00F3391E /* ViewController.m */; };
@@ -43,6 +45,9 @@
 		010761F11D7B3C5800BFE64C /* icon-40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-40@3x.png"; sourceTree = "<group>"; };
 		010761F21D7B3C5800BFE64C /* icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60@2x.png"; sourceTree = "<group>"; };
 		010761F31D7B3C5800BFE64C /* icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60@3x.png"; sourceTree = "<group>"; };
+		011AEEDA1D8062DD00AF1822 /* CoolCUUPUtill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoolCUUPUtill.h; sourceTree = "<group>"; };
+		011AEEDB1D8062DD00AF1822 /* CoolCUUPUtill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoolCUUPUtill.m; sourceTree = "<group>"; };
+		011AEEDD1D81DC2B00AF1822 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0BA5FC241A46667C00F3391E /* TextAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BA5FC281A46667C00F3391E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BA5FC291A46667C00F3391E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -71,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				011AEEDE1D81DC2B00AF1822 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,9 +103,19 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		011AEED61D80620300AF1822 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				011AEEDA1D8062DD00AF1822 /* CoolCUUPUtill.h */,
+				011AEEDB1D8062DD00AF1822 /* CoolCUUPUtill.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		0BA5FC1B1A46667C00F3391E = {
 			isa = PBXGroup;
 			children = (
+				011AEEDD1D81DC2B00AF1822 /* QuartzCore.framework */,
 				0BA5FC261A46667C00F3391E /* TextAnimation */,
 				0BA5FC401A46667C00F3391E /* TextAnimationTests */,
 				0BA5FC251A46667C00F3391E /* Products */,
@@ -118,10 +134,11 @@
 		0BA5FC261A46667C00F3391E /* TextAnimation */ = {
 			isa = PBXGroup;
 			children = (
-				010761ED1D7B3C5800BFE64C /* Images */,
+				011AEED61D80620300AF1822 /* Common */,
 				B65193A41A7B281C0005502A /* TextView */,
 				0BA5FC511A46698F00F3391E /* AnimateView */,
 				0BA5FC4D1A4666E800F3391E /* AnimationManager */,
+				010761ED1D7B3C5800BFE64C /* Images */,
 				0BA5FC2B1A46667C00F3391E /* AppDelegate.h */,
 				0BA5FC2C1A46667C00F3391E /* AppDelegate.m */,
 				0BA5FC2E1A46667C00F3391E /* ViewController.h */,
@@ -302,6 +319,7 @@
 				B65193A91A7B28260005502A /* HPGrowingTextView.m in Sources */,
 				0BA5FC2A1A46667C00F3391E /* main.m in Sources */,
 				0BA5FC501A46670D00F3391E /* TAGAnimationManager.m in Sources */,
+				011AEEDC1D8062DD00AF1822 /* CoolCUUPUtill.m in Sources */,
 				B65193AA1A7B28260005502A /* HPTextViewInternal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
