@@ -15,6 +15,7 @@
 		010761F91D7B3C5900BFE64C /* icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 010761F31D7B3C5800BFE64C /* icon-60@3x.png */; };
 		011AEEDC1D8062DD00AF1822 /* CoolCUUPUtill.m in Sources */ = {isa = PBXBuildFile; fileRef = 011AEEDB1D8062DD00AF1822 /* CoolCUUPUtill.m */; };
 		011AEEDE1D81DC2B00AF1822 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011AEEDD1D81DC2B00AF1822 /* QuartzCore.framework */; };
+		018F27DD1D980C1A003B6F70 /* Gobold_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 018F27DC1D980C1A003B6F70 /* Gobold_Bold.ttf */; };
 		0BA5FC2A1A46667C00F3391E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5FC291A46667C00F3391E /* main.m */; };
 		0BA5FC2D1A46667C00F3391E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5FC2C1A46667C00F3391E /* AppDelegate.m */; };
 		0BA5FC301A46667C00F3391E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5FC2F1A46667C00F3391E /* ViewController.m */; };
@@ -48,6 +49,7 @@
 		011AEEDA1D8062DD00AF1822 /* CoolCUUPUtill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoolCUUPUtill.h; sourceTree = "<group>"; };
 		011AEEDB1D8062DD00AF1822 /* CoolCUUPUtill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoolCUUPUtill.m; sourceTree = "<group>"; };
 		011AEEDD1D81DC2B00AF1822 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		018F27DC1D980C1A003B6F70 /* Gobold_Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Gobold_Bold.ttf; sourceTree = "<group>"; };
 		0BA5FC241A46667C00F3391E /* TextAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BA5FC281A46667C00F3391E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BA5FC291A46667C00F3391E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		0BA5FC271A46667C00F3391E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				018F27DC1D980C1A003B6F70 /* Gobold_Bold.ttf */,
 				0BA5FC281A46667C00F3391E /* Info.plist */,
 				0BA5FC291A46667C00F3391E /* main.m */,
 			);
@@ -287,6 +290,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				018F27DD1D980C1A003B6F70 /* Gobold_Bold.ttf in Resources */,
 				010761F51D7B3C5900BFE64C /* frog_small.png in Resources */,
 				0BA5FC331A46667C00F3391E /* Main.storyboard in Resources */,
 				0BA5FC381A46667C00F3391E /* LaunchScreen.xib in Resources */,

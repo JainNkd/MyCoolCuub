@@ -50,7 +50,7 @@
     self.textSize  = CGSizeMake(200+ (TEXT_SPACING * 2), 35);
     self.textColor = [UIColor whiteColor];
 //    self.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:35];
-    self.font = [UIFont boldSystemFontOfSize:35];
+    self.font = [UIFont fontWithName:@"Gobold Bold" size:28];// [UIFont boldSystemFontOfSize:35];
 }
 
 - (void)addStringToAnimate:(NSString *)string {
@@ -150,7 +150,7 @@
     //    if(self.labelArray.count ==0 && self.textArray.count>10)
     //    frame.origin.y = self.frame.size.height/2 - self.textSize.height - TEXT_PADDING - self.font.pointSize+30;
     //    else
-    frame.origin.y = self.frame.size.height/2 - self.textSize.height - TEXT_PADDING - self.font.pointSize;
+    frame.origin.y = self.frame.size.height/1.5 - self.textSize.height - TEXT_PADDING - self.font.pointSize;
     textLabel.frame = frame;
     [textLabel sizeToFit];
     

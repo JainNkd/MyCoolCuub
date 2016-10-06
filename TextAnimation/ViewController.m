@@ -40,6 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationController.navigationBarHidden = YES;
     self.view.backgroundColor = [UIColor lightGrayColor];
     //TextView
     _textView.isScrollable = NO;
@@ -58,6 +59,13 @@
     _textView.layer.borderWidth=0.5f;
     _textView.layer.cornerRadius=5.0f;
     _textView.placeholder=@"Type a Message";
+    
+    UILabel *headingLbl = [[UILabel alloc]initWithFrame:CGRectMake(0,0,self.view.frame.size.width,44)];
+    headingLbl.text = @"Animation View";
+    headingLbl.textAlignment = UITextAlignmentCenter;
+    headingLbl.font = [UIFont boldSystemFontOfSize:19];
+    headingLbl.textColor = [UIColor blackColor];
+    [self.animateView addSubview:headingLbl];
     
     
     CGRect frame = self.animateView.frame;
@@ -97,7 +105,7 @@
     CGRect containerFrame = self.textInputView.frame;
     CGRect tableFrame = self.animateView.frame;
     containerFrame.origin.y = self.view.bounds.size.height - (keyboardBounds.size.height + containerFrame.size.height);
-    tableFrame.size.height = containerFrame.origin.y-16;
+    tableFrame.size.height = containerFrame.origin.y-16+20;
     
     // animations settings
     [UIView beginAnimations:nil context:NULL];
@@ -125,7 +133,7 @@
     CGRect tableFrame = self.animateView.frame;
     
     containerFrame.origin.y = self.view.frame.size.height - containerFrame.size.height;
-    tableFrame.size.height = containerFrame.origin.y-16;
+    tableFrame.size.height = containerFrame.origin.y-16+20;
     
     // animations settings
     [UIView beginAnimations:nil context:NULL];
@@ -168,17 +176,19 @@
     
     
     //Setup for images for Background animal animation
-//    [self setUpImageViews];
-
-    //Play moving images at background
-    [self playAnimalBackgroundImages];
-    
+    [self setUpImageViews];
     
     //Text Animation start
     [self.animateView stopAnimation];
     [self.animateView addStringToAnimate:self.textView.text];
     [self.animateView startAnimation];
     self.textView.text = @"";
+    
+    //Setup for images for Background animal animation
+    //    [self setUpImageViews];
+    
+    //Play moving images at background
+    [self playAnimalBackgroundImages];
 }
 
 
@@ -307,7 +317,7 @@
     self.leftImagesArray = [[NSMutableArray alloc]init];
     
     xOrigin = -310;  //630
-    yOrigin = 150;
+    yOrigin = 250;
     for(int i=0;i<8;i++)
     {
         UIView *viewObj = [[UIView alloc]init];
